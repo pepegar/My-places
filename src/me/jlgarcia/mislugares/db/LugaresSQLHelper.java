@@ -1,5 +1,6 @@
 package me.jlgarcia.mislugares.db;
 
+import me.jlgarcia.mislugares.db.LugaresDB.Lugares;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class LugaresSQLHelper extends SQLiteOpenHelper
 {
+	
+	private static SQLiteDatabase db;
 	
 	public LugaresSQLHelper(Context context ) 
 	{
@@ -21,6 +24,9 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 	{
 
 		if(db.isReadOnly()){db = getWritableDatabase();}
+		
+		this.db = db;
+		
 		db.execSQL("CREATE TABLE " +
 		LugaresDB.Lugares.NOMBRE_TABLA + "(" +
 		LugaresDB.Lugares._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -60,7 +66,7 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		this.getWritableDatabase().insert(LugaresDB.Lugares.NOMBRE_TABLA, null, valores);
 	}
 	
-	public String[] leerNombresDeLugares()
+	public String[] getNombresLugares()
 	{
 		
 		String ret[];
@@ -93,13 +99,30 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 	
 	public String[] getLugarByName(String name){
 		
-		SQLiteDatabase db = getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		
+		// Devolvemos el lugar con nombre = name
+	    Cursor cursor = db.query(
+	    		Lugares.NOMBRE_TABLA, 
+	    		new String[]{Lugares._ID, Lugares.DESCRIPCION, Lugares.NOMBRE, Lugares.FOTO, Lugares.LATITUD, Lugares.LONGITUD},
+	    		Lugares.NOMBRE,
+	    		null,
+	    		null,
+	    		null,
+	    		null);
+	    
+	    // Si el cursor no es nulo, nos vamos a la primera posici—n
+	    if (cursor != null)
+	        cursor.moveToFirst();
+	
 		String[] ret = new String[6];
 		
-		String[] args = new String[]{name};
-		
-		Cursor c = db.query(false, LugaresDB.Lugares.NOMBRE_TABLA, args, "nombre=?", args, null, null, null, null);
+		ret[0] = cursor.getString(0);
+		ret[1] = cursor.getString(1);
+		ret[2] = cursor.getString(2);
+		ret[3] = cursor.getString(3);
+		ret[4] = cursor.getString(4);
+		ret[5] = cursor.getString(5);
 		
 		return ret;
 		

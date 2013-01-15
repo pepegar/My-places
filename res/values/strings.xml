@@ -6,5 +6,6 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_lista_lugares">ListaLugaresActivity</string>
     <string name="title_activity_mapa_lugares">MapaLugaresActivity</string>
+    <string name="title_activity_mostrar_lugar">MostrarLugarActivity</string>
 
 </resources>

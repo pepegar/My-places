@@ -30,6 +30,10 @@
             android:name="me.jlgarcia.mislugares.MapaLugaresActivity"
             android:label="@string/title_activity_mapa_lugares" >
         </activity>
+        <activity
+            android:name="me.jlgarcia.mislugares.MostrarLugarActivity"
+            android:label="@string/title_activity_mostrar_lugar" >
+        </activity>
     </application>
 
 </manifest>
