@@ -102,27 +102,21 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		// Devolvemos el lugar con nombre = name
-	    Cursor cursor = db.query(
-	    		Lugares.NOMBRE_TABLA, 
-	    		new String[]{Lugares._ID, Lugares.DESCRIPCION, Lugares.NOMBRE, Lugares.FOTO, Lugares.LATITUD, Lugares.LONGITUD},
-	    		Lugares.NOMBRE,
-	    		null,
-	    		null,
-	    		null,
-	    		null);
+	    Cursor c = db.rawQuery("select nombre, descripcion, latitud, longitud, foto from lugares where nombre = '" + name + "'", null);
 	    
 	    // Si el cursor no es nulo, nos vamos a la primera posici—n
-	    if (cursor != null)
-	        cursor.moveToFirst();
+	    if (c != null)
+	        c.moveToFirst();
 	
 		String[] ret = new String[6];
 		
-		ret[0] = cursor.getString(0);
-		ret[1] = cursor.getString(1);
-		ret[2] = cursor.getString(2);
-		ret[3] = cursor.getString(3);
-		ret[4] = cursor.getString(4);
-		ret[5] = cursor.getString(5);
+		ret[0] = c.getString(c.getColumnIndex("nombre"));
+		ret[1] = c.getString(c.getColumnIndex("descripcion"));
+		ret[2] = String.valueOf(c.getLong(c.getColumnIndex("latitud")));
+		ret[3] = String.valueOf(c.getLong(c.getColumnIndex("longitud")));
+		ret[4] = c.getString(c.getColumnIndex("foto"));
+		
+		c.close();
 		
 		return ret;
 		
