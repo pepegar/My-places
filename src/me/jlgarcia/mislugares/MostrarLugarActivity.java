@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 public class MostrarLugarActivity extends Activity {
 
@@ -19,7 +19,7 @@ public class MostrarLugarActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mostrar_lugar);
-		setTitle(R.string.titulo_mostar_lugar);
+		setTitle(R.string.title_activity_mostrar_lugar);
 
 		// Obtenemos el nombre del lugar
 		Bundle extras = getIntent().getExtras();
@@ -40,14 +40,15 @@ public class MostrarLugarActivity extends Activity {
 		String latitud = lugar[2];
 		String longitud = lugar[3];
 		String foto = lugar[4];
+		final String id = lugar[5];
 
-		// Identificamos los editText donde introduciremos los valores.
-		EditText campoNombre, campoDescripcion, campoLatitud, campoLongitud, campoFoto;
-		campoNombre = (EditText) findViewById(R.id.editTextNombre);
-		campoDescripcion = (EditText) findViewById(R.id.editTextDescripcion);
-		campoLatitud = (EditText) findViewById(R.id.editTextLatitud);
-		campoLongitud = (EditText) findViewById(R.id.editTextLongitud);
-		campoFoto = (EditText) findViewById(R.id.editTextFoto);
+		// Identificamos los TextView donde introduciremos los valores.
+		TextView campoNombre, campoDescripcion, campoLatitud, campoLongitud, campoFoto;
+		campoNombre = (TextView) findViewById(R.id.editNombre);
+		campoDescripcion = (TextView) findViewById(R.id.editDescripcion);
+		campoLatitud = (TextView) findViewById(R.id.editLatitud);
+		campoLongitud = (TextView) findViewById(R.id.editLongitud);
+		campoFoto = (TextView) findViewById(R.id.editFoto);
 
 		// Llenamos los campos con los valores
 		campoNombre.setText(nom);
@@ -63,9 +64,10 @@ public class MostrarLugarActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
-				Intent i = new Intent(MostrarLugarActivity.this, EditarLugarActivity.class);
-				i.putExtra("nombre", nom);
-				startActivity(i);
+				Intent llamaAEditarIntent = new Intent(MostrarLugarActivity.this, EditarLugarActivity.class);
+				llamaAEditarIntent.putExtra("nombre", nom);
+				llamaAEditarIntent.putExtra("id", id);
+				startActivity(llamaAEditarIntent);
 
 			}
 		});

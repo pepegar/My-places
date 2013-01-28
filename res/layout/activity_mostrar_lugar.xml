@@ -10,27 +10,28 @@
         android:id="@+id/textViewNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre:"
+        android:text="@string/nombre_de_lugar"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/editTextNombre"
+    <TextView
+        android:textSize="18sp"
+        android:id="@+id/editNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <requestFocus />
-    </EditText>
+    </TextView>
 
     <TextView
         android:id="@+id/textViewDescripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:text="Descripcion:"
+        android:text="@string/descripcion_del_lugar"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/editTextDescripcion"
+    <TextView
+        android:textSize="18sp"
+        android:id="@+id/editDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" />
@@ -40,11 +41,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:text="Latitud:"
+        android:text="@string/latitud_del_lugar"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/editTextLatitud"
+    <TextView
+        android:textSize="18sp"
+        android:id="@+id/editLatitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" />
@@ -54,11 +56,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:text="Longitud:"
+        android:text="@string/longitud_del_lugar"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/editTextLongitud"
+    <TextView
+        android:textSize="18sp"
+        android:id="@+id/editLongitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" />
@@ -68,11 +71,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
-        android:text="Foto:"
+        android:text="@string/foto_del_lugar"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <EditText
-        android:id="@+id/editTextFoto"
+    <TextView
+        android:textSize="18sp"
+        android:id="@+id/editFoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10" />
@@ -81,6 +85,6 @@
         android:id="@+id/buttonEditar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar" />
+        android:text="@string/boton_editar_lugar" />
 
 </LinearLayout>

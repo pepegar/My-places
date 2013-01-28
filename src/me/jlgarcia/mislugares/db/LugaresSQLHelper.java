@@ -102,7 +102,7 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		// Devolvemos el lugar con nombre = name
-	    Cursor c = db.rawQuery("select nombre, descripcion, latitud, longitud, foto from lugares where nombre = '" + name + "'", null);
+	    Cursor c = db.rawQuery("select nombre, descripcion, latitud, longitud, foto, _id from lugares where nombre = '" + name + "'", null);
 	    
 	    // Si el cursor no es nulo, nos vamos a la primera posici—n
 	    if (c != null)
@@ -115,6 +115,7 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		ret[2] = String.valueOf(c.getLong(c.getColumnIndex("latitud")));
 		ret[3] = String.valueOf(c.getLong(c.getColumnIndex("longitud")));
 		ret[4] = c.getString(c.getColumnIndex("foto"));
+		ret[5] = String.valueOf(c.getInt(c.getColumnIndex("_id")));
 		
 		c.close();
 		

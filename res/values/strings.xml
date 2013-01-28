@@ -7,5 +7,13 @@
     <string name="title_activity_mapa_lugares">Mapa de Mis Lugares</string>
     <string name="title_activity_mostrar_lugar">Mostrar Lugar</string>
     <string name="title_activity_editar_lugar">Editar Lugar</string>
+    <string name="menu_settings">TODO</string>
+    <string name="nombre_de_lugar">Nombre:</string>
+    <string name="descripcion_del_lugar">Descripcion:</string>
+    <string name="latitud_del_lugar">Latitud:</string>
+    <string name="longitud_del_lugar">Longitud:</string>
+    <string name="foto_del_lugar">Foto:</string>
+    <string name="boton_editar_lugar">Editar</string>
+    <string name="boton_guardar_lugar">Guardar</string>
 
 </resources>
