@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 public class MostrarLugarActivity extends Activity {
 
-	private LugaresSQLHelper sQLHelper;
+	private static LugaresSQLHelper sQLHelper;
+	private static TextView campoNombre, campoDescripcion, campoLatitud, campoLongitud, campoFoto;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,6 @@ public class MostrarLugarActivity extends Activity {
 		final String id = lugar[5];
 
 		// Identificamos los TextView donde introduciremos los valores.
-		TextView campoNombre, campoDescripcion, campoLatitud, campoLongitud, campoFoto;
 		campoNombre = (TextView) findViewById(R.id.editNombre);
 		campoDescripcion = (TextView) findViewById(R.id.editDescripcion);
 		campoLatitud = (TextView) findViewById(R.id.editLatitud);
@@ -74,6 +74,38 @@ public class MostrarLugarActivity extends Activity {
 
 	}
 
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+	}
+
+	@Override
+	protected void onRestart()
+	{
+		super.onRestart();
+	}
+	
+	protected static void refrescar(String nombre)
+	{
+		String lugar[] = sQLHelper.getLugarByName(nombre);
+
+		// Obtenemos los valores de todos los campos del lugar
+		final String nom = lugar[0];
+		String descripcion = lugar[1];
+		String latitud = lugar[2];
+		String longitud = lugar[3];
+		String foto = lugar[4];
+		final String id = lugar[5];
+
+		// Llenamos los campos con los valores
+		campoNombre.setText(nom);
+		campoDescripcion.setText(descripcion);
+		campoLatitud.setText(latitud);
+		campoLongitud.setText(longitud);
+		campoFoto.setText(foto);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

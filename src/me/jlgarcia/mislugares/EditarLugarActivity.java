@@ -3,12 +3,14 @@ package me.jlgarcia.mislugares;
 import me.jlgarcia.mislugares.db.LugaresSQLHelper;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditarLugarActivity extends Activity 
 {
@@ -38,18 +40,22 @@ public class EditarLugarActivity extends Activity
 		String lugar[] = sQLHelper.getLugarByName(nom);
 		
 		String nombre, descripcion, foto, latitud, longitud;
-		int id;
+		final int id;
 		
 		// Valores del lugar
 		nombre = lugar[0];
-		descripcion = lugar[0];
-		latitud = lugar[0];
-		longitud = lugar[0];
-		foto = lugar[0];
-		id = Integer.parseInt(lugar[0]);
+		descripcion = lugar[1];
+		latitud = lugar[2];
+		longitud = lugar[3];
+		foto = lugar[4];
+		id = Integer.parseInt(lugar[5]);
 		
 		// Campos en que podremos editar
-		EditText campoNombre, campoDescripcion, campoLatitud, campoLongitud, campoFoto, campoId;
+		final EditText campoNombre;
+		final EditText campoDescripcion;
+		final EditText campoLatitud;
+		final EditText campoLongitud;
+		final EditText campoFoto;
 		campoNombre = (EditText) findViewById(R.id.editTextNombre);
 		campoDescripcion = (EditText) findViewById(R.id.editTextDescripcion);
 		campoLatitud = (EditText) findViewById(R.id.editTextLatitud);
@@ -63,20 +69,31 @@ public class EditarLugarActivity extends Activity
 		campoLongitud.setText(longitud);
 		campoFoto.setText(foto);
 		
-		// Le damos comportamiento al bot—n
-		Button guardar = (Button) findViewById(R.id.buttonGuardar);
+		// Identificamos el bot—n
+		Button boton = (Button) findViewById(R.id.buttonGuardar);
 		
-		guardar.setOnClickListener(new OnClickListener() {
+		boton.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) 
-			{
+			public void onClick(View arg0) {
 				
+				sQLHelper.updateLugar(
+						id, 
+						campoNombre.getText().toString(), 
+						campoDescripcion.getText().toString(), 
+						Double.parseDouble(campoLatitud.getText().toString()), 
+						Double.parseDouble(campoLongitud.getText().toString()),
+						campoFoto.getText().toString());
 				
+				// Mostramos mensaje de confirmaci—n
+				Toast.makeText(getApplicationContext(), "Actualizado el lugar " + campoNombre.getText().toString() , Toast.LENGTH_LONG).show();
+				
+				// Refrescamos la actividad de MostrarLugar y de ListaLugares
+				MostrarLugarActivity.refrescar(campoNombre.getText().toString());
+				ListaLugaresActivity.refrescar();
 			}
+			
 		});
-		
-		
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package me.jlgarcia.mislugares.db;
 
-import me.jlgarcia.mislugares.db.LugaresDB.Lugares;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,7 +24,7 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 
 		if(db.isReadOnly()){db = getWritableDatabase();}
 		
-		this.db = db;
+		LugaresSQLHelper.setDb(db);
 		
 		db.execSQL("CREATE TABLE " +
 		LugaresDB.Lugares.NOMBRE_TABLA + "(" +
@@ -48,19 +47,19 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 	 * 
 	 * @param nombre String nombre del lugar
 	 * @param descripcion String descripcion del lugar
-	 * @param latitud long latitud del lugar
-	 * @param longitud long longitud del lugar
+	 * @param d long latitud del lugar
+	 * @param e long longitud del lugar
 	 * @param foto String uri de la foto 
 	 */
-	public void insertarLugar(String nombre, String descripcion, long latitud, long longitud, String foto)
+	public void insertarLugar(String nombre, String descripcion, double d, double e, String foto)
 	{
 		
 		ContentValues valores = new ContentValues();
 		
 		valores.put("nombre", nombre);
 		valores.put("descripcion", descripcion);
-		valores.put("latitud", latitud);
-		valores.put("longitud", longitud);
+		valores.put("latitud", d);
+		valores.put("longitud", e);
 		valores.put("foto", foto);
 		
 		this.getWritableDatabase().insert(LugaresDB.Lugares.NOMBRE_TABLA, null, valores);
@@ -75,13 +74,8 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		
 		Cursor c = this.getReadableDatabase().query(LugaresDB.Lugares.NOMBRE_TABLA, columnas, null, null, null, null, null);
 		
-		int id, nombre, descripcion, latitud, longitud, foto;
-		id = c.getColumnIndex("_ID");
+		int nombre;
 		nombre = c.getColumnIndex("nombre");
-		descripcion = c.getColumnIndex("descripcion");
-		latitud = c.getColumnIndex("latitud");
-		longitud = c.getColumnIndex("longitud");
-		foto = c.getColumnIndex("foto");
 	
 		ret = new String[c.getCount()];
 	
@@ -112,8 +106,8 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		
 		ret[0] = c.getString(c.getColumnIndex("nombre"));
 		ret[1] = c.getString(c.getColumnIndex("descripcion"));
-		ret[2] = String.valueOf(c.getLong(c.getColumnIndex("latitud")));
-		ret[3] = String.valueOf(c.getLong(c.getColumnIndex("longitud")));
+		ret[2] = String.valueOf(c.getDouble(c.getColumnIndex("latitud")));
+		ret[3] = String.valueOf(c.getDouble(c.getColumnIndex("longitud")));
 		ret[4] = c.getString(c.getColumnIndex("foto"));
 		ret[5] = String.valueOf(c.getInt(c.getColumnIndex("_id")));
 		
@@ -121,5 +115,29 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		
 		return ret;
 		
+	}
+
+	public void updateLugar(int id, String nombre, String descripcion, double latitud, double longitud, String foto) 
+	{
+		SQLiteDatabase db = getWritableDatabase();
+		
+		ContentValues valores = new ContentValues();
+		
+		valores.put("nombre", nombre);
+		valores.put("descripcion", descripcion);
+		valores.put("latitud", latitud);
+		valores.put("longitud", longitud);
+		valores.put("foto", foto);
+		
+		db.update(LugaresDB.Lugares.NOMBRE_TABLA, valores, "_id = " + id, null);
+		db.close();
+	}
+
+	public static SQLiteDatabase getDb() {
+		return db;
+	}
+
+	public static void setDb(SQLiteDatabase db) {
+		LugaresSQLHelper.db = db;
 	}
 }

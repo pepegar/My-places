@@ -15,7 +15,6 @@
         android:id="@+id/editTextNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:editable="false"
         android:ems="10" >
 
         <requestFocus />
@@ -33,7 +32,6 @@
         android:id="@+id/editTextDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:editable="false"
         android:ems="10" />
 
     <TextView
@@ -48,7 +46,6 @@
         android:id="@+id/editTextLatitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:editable="false"
         android:ems="10" />
 
     <TextView
@@ -63,7 +60,6 @@
         android:id="@+id/editTextLongitud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:editable="false"
         android:ems="10" />
 
     <TextView
@@ -77,7 +73,6 @@
         android:id="@+id/editTextFoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:editable="false"
         android:ems="10" />
 
     <Button
