@@ -2,6 +2,7 @@ package me.jlgarcia.mislugares.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -43,7 +44,7 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 	}
 
 	/**
-	 * MŽtodo que se encarga de insertar lugares en nuestra tabla lugares
+	 * Mï¿½todo que se encarga de insertar lugares en nuestra tabla lugares
 	 * 
 	 * @param nombre String nombre del lugar
 	 * @param descripcion String descripcion del lugar
@@ -65,54 +66,98 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		this.getWritableDatabase().insert(LugaresDB.Lugares.NOMBRE_TABLA, null, valores);
 	}
 	
-	public String[] getNombresLugares()
+	public String[] getNombresLugares() 
 	{
 		
-		String ret[];
+		String ret[] = null;
+        Cursor c = null;
 		
 		String[] columnas = {"_ID", "nombre", "descripcion", "latitud", "longitud", "foto"};
-		
-		Cursor c = this.getReadableDatabase().query(LugaresDB.Lugares.NOMBRE_TABLA, columnas, null, null, null, null, null);
-		
-		int nombre;
-		nombre = c.getColumnIndex("nombre");
-	
-		ret = new String[c.getCount()];
-	
-		int i = 0;
-		// Recorremos el contenido del cursor
-		for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-		{
-			ret[i] = c.getString(nombre);
-			i++;
-		}
-		
+
+        try {
+            c = this.getReadableDatabase().query(LugaresDB.Lugares.NOMBRE_TABLA, columnas, null, null, null, null, null);
+
+            int nombre;
+            nombre = c.getColumnIndex("nombre");
+
+            ret = new String[c.getCount()];
+
+            int i = 0;
+            // Recorremos el contenido del cursor
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
+            {
+                ret[i] = c.getString(nombre);
+                i++;
+            }
+
+        }catch (Exception e){
+
+            Log.d("Excepcion: ", e.getMessage());
+
+        } finally {
+
+            c.close();
+
+        }
+
 		return ret;
 	
 	}
+
+	public Cursor getLugares()
+	{
+		
+		String[] columnas = {"_ID", "nombre", "descripcion", "latitud", "longitud", "foto"};
+        Cursor c = null;
+
+        try {
+
+            c = this.getReadableDatabase().query(LugaresDB.Lugares.NOMBRE_TABLA, columnas, null, null, null, null, null);
+
+        } catch (Exception e){
+
+            Log.d("Excepcion desde getLugares(): ", e.getMessage());
+
+        }
+
+		return c;
+		
+	}	
 	
 	public String[] getLugarByName(String name){
 		
 		SQLiteDatabase db = this.getReadableDatabase();
-		
-		// Devolvemos el lugar con nombre = name
-	    Cursor c = db.rawQuery("select nombre, descripcion, latitud, longitud, foto, _id from lugares where nombre = '" + name + "'", null);
-	    
-	    // Si el cursor no es nulo, nos vamos a la primera posici—n
-	    if (c != null)
-	        c.moveToFirst();
-	
-		String[] ret = new String[6];
-		
-		ret[0] = c.getString(c.getColumnIndex("nombre"));
-		ret[1] = c.getString(c.getColumnIndex("descripcion"));
-		ret[2] = String.valueOf(c.getDouble(c.getColumnIndex("latitud")));
-		ret[3] = String.valueOf(c.getDouble(c.getColumnIndex("longitud")));
-		ret[4] = c.getString(c.getColumnIndex("foto"));
-		ret[5] = String.valueOf(c.getInt(c.getColumnIndex("_id")));
-		
-		c.close();
-		
+        Cursor c = null;
+        String[] ret = new String[6];
+
+        try {
+
+            // Devolvemos el lugar con nombre = name
+            c = db.rawQuery("select nombre, descripcion, latitud, longitud, foto, _id from lugares where nombre = '" + name + "'", null);
+
+            // Si el cursor no es nulo, nos vamos a la primera posiciï¿½n
+            if (c != null)
+                c.moveToFirst();
+
+
+
+            ret[0] = c.getString(c.getColumnIndex("nombre"));
+            ret[1] = c.getString(c.getColumnIndex("descripcion"));
+            ret[2] = String.valueOf(c.getDouble(c.getColumnIndex("latitud")));
+            ret[3] = String.valueOf(c.getDouble(c.getColumnIndex("longitud")));
+            ret[4] = c.getString(c.getColumnIndex("foto"));
+            ret[5] = String.valueOf(c.getInt(c.getColumnIndex("_id")));
+
+        } catch (Exception e) {
+
+            Log.d("Excepcion en getLugarByName(): ", e.getMessage());
+
+        } finally {
+
+            c.close();
+
+        }
+
 		return ret;
 		
 	}
@@ -128,9 +173,21 @@ public class LugaresSQLHelper extends SQLiteOpenHelper
 		valores.put("latitud", latitud);
 		valores.put("longitud", longitud);
 		valores.put("foto", foto);
-		
-		db.update(LugaresDB.Lugares.NOMBRE_TABLA, valores, "_id = " + id, null);
-		db.close();
+
+        try {
+
+            db.update(LugaresDB.Lugares.NOMBRE_TABLA, valores, "_id = " + id, null);
+
+        } catch (Exception e){
+
+            Log.d("Excepcion en updateLugar(): ", e.getMessage());
+
+        } finally {
+
+            db.close();
+
+        }
+
 	}
 
 	public static SQLiteDatabase getDb() {

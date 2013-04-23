@@ -1,0 +1,8 @@
+*.class
+*.png
+.idea
+
+# Package Files #
+*.jar
+*.war
+*.ear

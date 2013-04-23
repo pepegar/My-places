@@ -15,5 +15,6 @@
     <string name="foto_del_lugar">Foto:</string>
     <string name="boton_editar_lugar">Editar</string>
     <string name="boton_guardar_lugar">Guardar</string>
+    <string name="title_activity_insertar_lugar">InsertarLugarActivity</string>
 
 </resources>

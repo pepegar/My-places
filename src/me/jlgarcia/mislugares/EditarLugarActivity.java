@@ -1,5 +1,10 @@
 package me.jlgarcia.mislugares;
 
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.widget.*;
 import me.jlgarcia.mislugares.db.LugaresSQLHelper;
 import android.os.Bundle;
 import android.app.Activity;
@@ -8,14 +13,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class EditarLugarActivity extends Activity 
 {
 
-	private LugaresSQLHelper sQLHelper;
+    private static final int RESULT_LOAD_IMAGE = 1;
+    private LugaresSQLHelper sQLHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -28,7 +31,7 @@ public class EditarLugarActivity extends Activity
 		Bundle extras = getIntent().getExtras();
 		String nom = "";
 		
-		// guardamos el nombre y id s—lo si se han pasado como extras	
+		// guardamos el nombre y id sï¿½lo si se han pasado como extras	
 		if (extras != null) 
 		{
 			nom = extras.getString("nombre");
@@ -55,23 +58,41 @@ public class EditarLugarActivity extends Activity
 		final EditText campoDescripcion;
 		final EditText campoLatitud;
 		final EditText campoLongitud;
-		final EditText campoFoto;
+        final EditText campoFoto;
+        final Button botonEligeFoto;
+        final ImageView imageView;
 		campoNombre = (EditText) findViewById(R.id.editTextNombre);
 		campoDescripcion = (EditText) findViewById(R.id.editTextDescripcion);
 		campoLatitud = (EditText) findViewById(R.id.editTextLatitud);
-		campoLongitud = (EditText) findViewById(R.id.editTextLongitud);
-		campoFoto = (EditText) findViewById(R.id.editTextFoto);
-		
+        campoLongitud = (EditText) findViewById(R.id.editTextLongitud);
+        campoFoto = (EditText) findViewById(R.id.editTextFoto);
+        botonEligeFoto = (Button) findViewById(R.id.editar_buttonSeleccionaFoto);
+        imageView = (ImageView) findViewById(R.id.editar_imageView);
+
 		// Insertamos los valores en los campos
 		campoNombre.setText(nombre);
 		campoDescripcion.setText(descripcion);
 		campoLatitud.setText(latitud);
-		campoLongitud.setText(longitud);
-		campoFoto.setText(foto);
+        campoLongitud.setText(longitud);
+        campoFoto.setText(foto);
+        imageView.setImageBitmap(BitmapFactory.decodeFile(foto));
+
+        // OnClickListener del botÃ³n de elegir otra foto
+        botonEligeFoto.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent( Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+
+        });
 		
-		// Identificamos el bot—n
+		// Identificamos el botï¿½n
 		Button boton = (Button) findViewById(R.id.buttonGuardar);
-		
+
+        // OnClickListener del botÃ³n de guardar
 		boton.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -85,7 +106,7 @@ public class EditarLugarActivity extends Activity
 						Double.parseDouble(campoLongitud.getText().toString()),
 						campoFoto.getText().toString());
 				
-				// Mostramos mensaje de confirmaci—n
+				// Mostramos mensaje de confirmaciï¿½n
 				Toast.makeText(getApplicationContext(), "Actualizado el lugar " + campoNombre.getText().toString() , Toast.LENGTH_LONG).show();
 				
 				// Refrescamos la actividad de MostrarLugar y de ListaLugares
@@ -104,4 +125,29 @@ public class EditarLugarActivity extends Activity
 		return true;
 	}
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            BitmapFactory.Options opts = new BitmapFactory.Options();
+            opts.inSampleSize = 4;
+
+            ImageView imageView = (ImageView) findViewById(R.id.editar_imageView);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath, opts));
+
+            EditText campoFoto = (EditText) findViewById(R.id.editTextFoto);
+            campoFoto.setText(picturePath);
+        }
+    }
 }

@@ -40,18 +40,11 @@ public class PrincipalActivity extends Activity {
 			public void onClick(View v) {
 				
 				Intent LlamaAMapaIntent = new Intent(PrincipalActivity.this, MapaLugaresActivity.class);
-				startActivity(LlamaAMapaIntent);
+				startActivityForResult(LlamaAMapaIntent, 0);
 				
 			}
 			
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_principal, menu);
-		return true;
 	}
 
 }

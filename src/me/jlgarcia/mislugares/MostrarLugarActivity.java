@@ -1,5 +1,7 @@
 package me.jlgarcia.mislugares;
 
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 import me.jlgarcia.mislugares.db.LugaresSQLHelper;
 import android.os.Bundle;
 import android.app.Activity;
@@ -50,14 +52,21 @@ public class MostrarLugarActivity extends Activity {
 		campoLongitud = (TextView) findViewById(R.id.editLongitud);
 		campoFoto = (TextView) findViewById(R.id.editFoto);
 
+        ImageView imageView = (ImageView) findViewById(R.id.mostrar_imageViewFoto);
+
 		// Llenamos los campos con los valores
 		campoNombre.setText(nom);
 		campoDescripcion.setText(descripcion);
 		campoLatitud.setText(latitud);
 		campoLongitud.setText(longitud);
-		campoFoto.setText(foto);
+        campoFoto.setText(foto);
 
-		// Le damos comportamiento al bot—n de Editar
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        opts.inSampleSize = 4;
+
+        imageView.setImageBitmap(BitmapFactory.decodeFile(foto, opts));
+
+		// Le damos comportamiento al botï¿½n de Editar
 		Button editar = (Button) findViewById(R.id.buttonEditar);
 		editar.setOnClickListener(new OnClickListener() {
 

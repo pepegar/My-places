@@ -3,103 +3,101 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MostrarLugarActivity" >
+        tools:context=".InsertarLugarActivity" >
 
-        <TextView
-            android:id="@+id/textViewNombre"
+           <TextView
+            android:id="@+id/anade_textViewNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nombre_de_lugar"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/editNombre"
+        <EditText
+            android:id="@+id/anade_editTextNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:ems="10" >
 
-        </TextView>
+            <requestFocus />
+        </EditText>
 
         <TextView
-            android:id="@+id/textViewDescripcion"
+            android:id="@+id/anade_textViewDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:text="@string/descripcion_del_lugar"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/editDescripcion"
+        <EditText
+            android:id="@+id/anade_editTextDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10" />
 
         <TextView
-            android:id="@+id/textViewLatitud"
+            android:id="@+id/anade_textViewLatitud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:text="@string/latitud_del_lugar"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/editLatitud"
+        <EditText
+            android:id="@+id/anade_editTextLatitud"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10" />
 
         <TextView
-            android:id="@+id/textViewLongitud"
+            android:id="@+id/anade_textViewLongitud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:text="@string/longitud_del_lugar"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/editLongitud"
+        <EditText
+            android:id="@+id/anade_editTextLongitud"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:ems="10"/>
 
         <TextView
-            android:id="@+id/textViewfoto"
+            android:id="@+id/anade_textViewFoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
             android:text="@string/foto_del_lugar"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:textSize="18sp"
-            android:id="@+id/editFoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="no-foto"
+                android:id="@+id/anade_editTextFoto" android:visibility="gone"/>
 
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-            <ImageView
+            <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mostrar_imageViewFoto" android:layout_gravity="center"/>
+                    android:text="Seleccionar"
+                    android:id="@+id/anade_botonSeleccionaFoto"/>
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/anade_foto"/>
         </LinearLayout>
-
         <Button
-            android:id="@+id/buttonEditar"
+            android:id="@+id/anade_buttonGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/boton_editar_lugar" />
+            android:text="@string/boton_guardar_lugar" />
 
     </LinearLayout>
-
 </ScrollView>

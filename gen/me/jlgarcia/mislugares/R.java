@@ -12,45 +12,64 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int marker=0x7f020001;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f07000c;
-        public static final int buttonEditar=0x7f070013;
-        public static final int buttonGuardar=0x7f07000a;
-        public static final int editDescripcion=0x7f07000e;
-        public static final int editFoto=0x7f070012;
-        public static final int editLatitud=0x7f07000f;
-        public static final int editLongitud=0x7f070010;
-        public static final int editNombre=0x7f07000d;
+        public static final int LinearLayout1=0x7f07001c;
+        public static final int anade_botonSeleccionaFoto=0x7f070017;
+        public static final int anade_buttonGuardar=0x7f070019;
+        public static final int anade_editTextDescripcion=0x7f070010;
+        public static final int anade_editTextFoto=0x7f070016;
+        public static final int anade_editTextLatitud=0x7f070012;
+        public static final int anade_editTextLongitud=0x7f070014;
+        public static final int anade_editTextNombre=0x7f07000e;
+        public static final int anade_foto=0x7f070018;
+        public static final int anade_textViewDescripcion=0x7f07000f;
+        public static final int anade_textViewFoto=0x7f070015;
+        public static final int anade_textViewLatitud=0x7f070011;
+        public static final int anade_textViewLongitud=0x7f070013;
+        public static final int anade_textViewNombre=0x7f07000d;
+        public static final int buttonEditar=0x7f070024;
+        public static final int buttonGuardar=0x7f07000c;
+        public static final int editDescripcion=0x7f07001e;
+        public static final int editFoto=0x7f070022;
+        public static final int editLatitud=0x7f07001f;
+        public static final int editLongitud=0x7f070020;
+        public static final int editNombre=0x7f07001d;
         public static final int editTextDescripcion=0x7f070003;
         public static final int editTextFoto=0x7f070009;
         public static final int editTextLatitud=0x7f070005;
         public static final int editTextLongitud=0x7f070007;
         public static final int editTextNombre=0x7f070001;
-        public static final int lista=0x7f070015;
-        public static final int listaLugares=0x7f07000b;
-        public static final int mapa=0x7f070014;
-        public static final int menu_settings=0x7f070016;
+        public static final int editar_buttonSeleccionaFoto=0x7f07000a;
+        public static final int editar_imageView=0x7f07000b;
+        public static final int lista=0x7f070025;
+        public static final int listaLugares=0x7f07001a;
+        public static final int mapa=0x7f07001b;
+        public static final int menu_settings=0x7f070026;
+        public static final int mostrar_imageViewFoto=0x7f070023;
         public static final int textViewDescripcion=0x7f070002;
         public static final int textViewFoto=0x7f070008;
         public static final int textViewLatitud=0x7f070004;
         public static final int textViewLongitud=0x7f070006;
         public static final int textViewNombre=0x7f070000;
-        public static final int textViewfoto=0x7f070011;
+        public static final int textViewfoto=0x7f070021;
     }
     public static final class layout {
         public static final int activity_editar_lugar=0x7f030000;
-        public static final int activity_lista_lugares=0x7f030001;
-        public static final int activity_mapa_lugares=0x7f030002;
-        public static final int activity_mostrar_lugar=0x7f030003;
-        public static final int activity_principal=0x7f030004;
+        public static final int activity_insertar_lugar=0x7f030001;
+        public static final int activity_lista_lugares=0x7f030002;
+        public static final int activity_mapa_lugares=0x7f030003;
+        public static final int activity_mostrar_lugar=0x7f030004;
+        public static final int activity_principal=0x7f030005;
     }
     public static final class menu {
         public static final int activity_editar_lugar=0x7f060000;
-        public static final int activity_lista_lugares=0x7f060001;
-        public static final int activity_mapa_lugares=0x7f060002;
-        public static final int activity_mostrar_lugar=0x7f060003;
-        public static final int activity_principal=0x7f060004;
+        public static final int activity_insertar_lugar=0x7f060001;
+        public static final int activity_lista_lugares=0x7f060002;
+        public static final int activity_mapa_lugares=0x7f060003;
+        public static final int activity_mostrar_lugar=0x7f060004;
+        public static final int activity_principal=0x7f060005;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
@@ -64,6 +83,7 @@ public final class R {
         public static final int menu_settings=0x7f040006;
         public static final int nombre_de_lugar=0x7f040007;
         public static final int title_activity_editar_lugar=0x7f040005;
+        public static final int title_activity_insertar_lugar=0x7f04000e;
         public static final int title_activity_lista_lugares=0x7f040002;
         public static final int title_activity_mapa_lugares=0x7f040003;
         public static final int title_activity_mostrar_lugar=0x7f040004;
